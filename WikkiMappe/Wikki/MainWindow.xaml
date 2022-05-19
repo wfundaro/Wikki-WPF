@@ -1,0 +1,99 @@
+﻿<MW:MetroWindow x:Class="Wikki.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:MD="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:MW="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:local="clr-namespace:Wikki"
+        mc:Ignorable="d"
+        SnapsToDevicePixels="True"
+        UseLayoutRounding="True"
+        Height="650" MinHeight="650" 
+        Width="1200" MinWidth="800"
+        WindowTitleBrush="{StaticResource AppColorCyan}"
+        WindowStartupLocation="CenterScreen"
+        TitleBarHeight="20"
+        ShowCloseButton="False"
+        ShowMaxRestoreButton="False"
+        ShowMinButton="False"
+        ResizeMode="CanResizeWithGrip"
+        >
+    
+    <Grid>
+        <Grid Background="{StaticResource AppColorBlue}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            
+            <!-- TitleBar -->
+            <Grid Grid.Row="0">
+                <!-- Menu Button-->
+                <Grid HorizontalAlignment="Left" Width="200">
+                    <StackPanel Orientation="Horizontal">
+                        <ToggleButton x:Name="BtnHamburgerMenu">
+                            <ToggleButton.Style>
+                                <Style TargetType="ToggleButton">
+                                    <Setter Property="Background" Value="{StaticResource AppColorCyan}"/>
+                                    <Setter Property="Height" Value="36"/>
+                                    <Setter Property="Width" Value="36"/>
+                                    <Setter Property="Cursor" Value="Hand"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="ToggleButton">
+                                                <Border BorderThickness="1" Background="{StaticResource AppColorBlue}" BorderBrush="{StaticResource AppColorCyan}" CornerRadius="3">
+                                                    <Grid>
+                                                        <Grid>
+                                                            <MD:PackIcon Name="MenuOpen" Kind="Menu" Foreground="{StaticResource AppColorCyan}" Width="32" Height="32" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                                                            <MD:PackIcon Name="MenuClose" Kind="Close" Visibility="Hidden" Foreground="{StaticResource AppColorCyan}" Width="32" Height="32" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                                                        </Grid>
+                                                    </Grid>
+                                                </Border>
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="IsChecked" Value="True">
+                                                        <Setter TargetName="MenuOpen" Property="Visibility" Value="Hidden"/>
+                                                        <Setter TargetName="MenuClose" Property="Visibility" Value="Visible"/>
+                                                    </Trigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </ToggleButton.Style>
+                        </ToggleButton>
+                    </StackPanel>
+                </Grid>
+                
+                <!-- App Name -->
+                <Grid HorizontalAlignment="Stretch">
+                    <TextBlock Text="WIKKI" FontFamily="Emmett" FontSize="32" FontWeight="ExtraBold"
+                               HorizontalAlignment="Center" VerticalAlignment="Center"
+                               Foreground="{StaticResource AppColorWhite}"/>
+                </Grid>
+                
+                <!-- Window Buttons -->
+                <Grid HorizontalAlignment="Right">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                        <Button x:Name="BtnWindowMinimize" Style="{StaticResource MinCloseBtnStyle}">
+                            <MD:PackIcon Kind="WindowMinimize" Width="24" Height="24" 
+                                         Foreground="{StaticResource AppColorCyan}"
+                                         FontWeight="ExtraBold"/>
+                        </Button>
+                        <ToggleButton x:Name="BtnWindowRestore" Margin="8 0" Style="{StaticResource MaxBtnStyle}">
+                            
+                        </ToggleButton>
+                        <Button x:Name="BtnWindowClose" Style="{StaticResource MinCloseBtnStyle}">
+                            <MD:PackIcon Kind="WindowClose" Width="24" Height="24" 
+                                         Foreground="Red"
+                                         FontWeight="ExtraBold"/>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+            
+            <!-- Content page -->
+            <Grid Grid.Row="1"></Grid>
+        </Grid>
+    </Grid>
+</MW:MetroWindow>
