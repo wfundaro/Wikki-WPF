@@ -22,7 +22,10 @@
                 <ResourceDictionary Source="./Resources/AppStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
+            <!-- Definition des couleurs de l'application -->
             <SolidColorBrush x:Key="AppColorBlue" Color="#FF042840"/>
+            <Color x:Key="AppBlueColor">#FF042840</Color>
+            <Color x:Key="AppCyanColor">#FF10BFC7</Color>
             <SolidColorBrush x:Key="AppColorBlueHover" Color="#FF075683"/>
             <SolidColorBrush x:Key="AppColorCyan" Color="#FF10BFC7"/>
             <SolidColorBrush x:Key="AppColorCyanHover" Color="#FF6AF1F7"/>
@@ -37,10 +40,13 @@
                 <Setter Property="BorderThickness" Value="0"/>
                 <Setter Property="Template">
                     <Setter.Value>
+                        <!-- Reéfinition du bouton en ajoutant un template -->
                         <ControlTemplate TargetType="Button">
                             <Border x:Name="BtnBorder" Background="Transparent" BorderThickness="0" CornerRadius="15">
+                                <!-- ContentPresenter sera remplacé par le contenu du bouton lorqu'il est est défini -->
                                 <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>                                
                             </Border>
+                            <!-- Ajout des triggers -->
                             <ControlTemplate.Triggers>
                                 <Trigger Property="Button.IsMouseOver" Value="True">
                                     <Setter TargetName="BtnBorder" Property="Background" Value="White"/>
@@ -60,6 +66,7 @@
                     <Setter.Value>
                         <ControlTemplate TargetType="ToggleButton">
                             <Border x:Name="BtnBorder" Background="Transparent" BorderThickness="0" CornerRadius="15">
+                                <!-- Dans un border on ne peut mettre qu'un élément donc ajout d'une grid pour mettre les 2 icones -->
                                 <Grid>
                                     <MD:PackIcon Name="PIMax" Kind="WindowMaximize" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                                                  Foreground="{StaticResource AppColorCyan}" FontWeight="ExtraBold"/>
@@ -70,9 +77,11 @@
                                 </Grid>
                             </Border>
                             <ControlTemplate.Triggers>
+                                <!-- Trigger survol -->
                                 <Trigger Property="ToggleButton.IsMouseOver" Value="True">
                                     <Setter TargetName="BtnBorder" Property="Background" Value="White"/>
                                 </Trigger>
+                                <!-- Trigger lors de l'appuie sur le bouton et qu'il est checked -->
                                 <Trigger Property="ToggleButton.IsChecked" Value="True">
                                     <Setter TargetName="PIMax" Property="Visibility" Value="Hidden"/>
                                     <Setter TargetName="PIMin" Property="Visibility" Value="Visible"/>

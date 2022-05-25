@@ -9,17 +9,172 @@
         mc:Ignorable="d"
         SnapsToDevicePixels="True"
         UseLayoutRounding="True"
-        Height="650" MinHeight="650" 
+        Height="650" MinHeight="650"
         Width="1200" MinWidth="800"
         WindowTitleBrush="{StaticResource AppColorCyan}"
         WindowStartupLocation="CenterScreen"
-        TitleBarHeight="20"
+        TitleBarHeight="5"
         ShowCloseButton="False"
         ShowMaxRestoreButton="False"
         ShowMinButton="False"
         ResizeMode="CanResizeWithGrip"
         >
+
+    <Window.Resources>
+        <Storyboard x:Key="AnimateMenuItem">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="MenuHomeTranslateTransform"
+                                           Storyboard.TargetProperty="X">
+                <EasingDoubleKeyFrame KeyTime="0" Value="-400"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="MenuDataTranslateTransform"
+                                           Storyboard.TargetProperty="X">
+                <EasingDoubleKeyFrame KeyTime="0" Value="-400"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="MenuStatsTranslateTransform"
+                                           Storyboard.TargetProperty="X">
+                <EasingDoubleKeyFrame KeyTime="0" Value="-400"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="MenuTestTranslateTransform"
+                                           Storyboard.TargetProperty="X">
+                <EasingDoubleKeyFrame KeyTime="0" Value="-400"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+
+            <ColorAnimationUsingKeyFrames Storyboard.TargetName="MenuFlyout"
+                                          Storyboard.TargetProperty="(Background).(SolidColorBrush.Color)">
+                <LinearColorKeyFrame KeyTime="0" Value="{StaticResource AppCyanColor}"/>
+                <LinearColorKeyFrame KeyTime="0:0:0.3" Value="{StaticResource AppBlueColor}"/>
+            </ColorAnimationUsingKeyFrames>
+            
+        </Storyboard>
+    </Window.Resources>
     
+    <Window.Triggers>
+        <EventTrigger SourceName="BtnHamburgerMenu" RoutedEvent="ToggleButton.Checked">
+            <BeginStoryboard Storyboard="{StaticResource AnimateMenuItem}"/>
+        </EventTrigger>
+    </Window.Triggers>
+    
+<!-- Utilisation du flyout de metroWindow sur la fenetre -->
+    <MW:MetroWindow.Flyouts>
+        <MW:FlyoutsControl Margin="0 45 0 0">
+            <!-- Flyout du menu de gauche -->
+            <MW:Flyout x:Name="MenuFlyout"
+                       Position="Left"
+                       Background="{StaticResource AppColorBlue}"
+                       CloseButtonVisibility="Collapsed"
+                       >
+                <!-- Margin négatif sur Border pour palier le flyout qui ajoute de base un padding haut -->
+                <Border Grid.Column="0" BorderThickness="0 1 1 0" 
+                        BorderBrush="{StaticResource AppColorCyan}"  
+                        Margin="0 -35 0 0">
+                    <Grid>
+                        <!-- Marque l'onglet actif -->
+                        <Border x:Name="BorderActiveMenu" Panel.ZIndex="1"
+                                Background="{StaticResource AppColorCyanHover}"
+                                Margin="0 10 0 0"
+                                Width="6" Height="44" 
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top">
+                        </Border>
+                        <!-- Liste des onglets du menu -->
+                        <ListView x:Name="MainMenuList"
+                                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                                  ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                                  Margin="0 7 10 0"
+                                  Background="Transparent"
+                                  ItemContainerStyle="{StaticResource ListViewMenuButtonStyle}" SelectionChanged="MainMenuList_SelectionChanged">
+                            <ListViewItem Name="ListViewItemHome">
+                                <!-- Initialise pour les animations -->
+                                <ListViewItem.RenderTransform>
+                                    <TransformGroup>
+                                        <TranslateTransform x:Name="MenuHomeTranslateTransform"/>
+                                    </TransformGroup>
+                                </ListViewItem.RenderTransform>
+                                <StackPanel Orientation="Horizontal">
+                                    <Border Height="40" Width="40" VerticalAlignment="Bottom">
+                                        <MD:PackIcon Kind="Home" Foreground="White" Width="30" Height="30" Margin="10 8 0 0"/>
+                                    </Border>
+                                    <Label Content="INFORMATIONS" Foreground="White"
+                                           Height="40" 
+                                           Padding="10 10 0 0"
+                                           FontWeight="Bold"
+                                           FontSize="22"/>
+                                </StackPanel>
+                            </ListViewItem>
+                            <ListViewItem Name="ListViewItemData">
+                                <!-- Initialise pour les animations -->
+                                <ListViewItem.RenderTransform>
+                                    <TransformGroup>
+                                        <TranslateTransform x:Name="MenuDataTranslateTransform"/>
+                                    </TransformGroup>
+                                </ListViewItem.RenderTransform>
+                                <StackPanel Orientation="Horizontal">
+                                    <Border Height="40" Width="40" VerticalAlignment="Bottom">
+                                        <MD:PackIcon Kind="AccountEdit" Foreground="White" Width="30" Height="30" Margin="10 8 0 0"/>
+                                    </Border>
+                                    <Label Content="DONNEES" Foreground="White"
+                                           Height="40" 
+                                           Padding="10 10 0 0"
+                                           FontWeight="Bold"
+                                           FontSize="22"/>
+                                </StackPanel>
+                            </ListViewItem>
+                            <ListViewItem Name="ListViewItemStats">
+                                <!-- Initialise pour les animations -->
+                                <ListViewItem.RenderTransform>
+                                    <TransformGroup>
+                                        <TranslateTransform x:Name="MenuStatsTranslateTransform"/>
+                                    </TransformGroup>
+                                </ListViewItem.RenderTransform>
+                                <StackPanel Orientation="Horizontal">
+                                    <Border Height="40" Width="40" VerticalAlignment="Bottom">
+                                        <MD:PackIcon Kind="ChartBar" Foreground="White" Width="30" Height="30" Margin="10 8 0 0"/>
+                                    </Border>
+                                    <Label Content="STATISTIQUES" Foreground="White"
+                                           Height="40" 
+                                           Padding="10 10 0 0"
+                                           FontWeight="Bold"
+                                           FontSize="22"/>
+                                </StackPanel>
+                            </ListViewItem>
+                            <ListViewItem Name="ListViewItemTest">
+                                <!-- Initialise pour les animations -->
+                                <ListViewItem.RenderTransform>
+                                    <TransformGroup>
+                                        <TranslateTransform x:Name="MenuTestTranslateTransform"/>
+                                    </TransformGroup>
+                                </ListViewItem.RenderTransform>
+                                <StackPanel Orientation="Horizontal">
+                                    <Border Height="40" Width="40" VerticalAlignment="Bottom">
+                                        <MD:PackIcon Kind="ChairAccent" Foreground="White" Width="30" Height="30" Margin="10 8 0 0"/>
+                                    </Border>
+                                    <Label Content="TEST" Foreground="White"
+                                           Height="40" 
+                                           Padding="10 10 0 0"
+                                           FontWeight="Bold"
+                                           FontSize="22"/>
+                                </StackPanel>
+                            </ListViewItem>
+                        </ListView>
+                    </Grid>
+                </Border>
+            </MW:Flyout>
+        
+            <!-- Flyout des infos venant du bas -->
+            <MW:Flyout x:Name="InfoFlyout">
+                
+            </MW:Flyout>
+        </MW:FlyoutsControl>
+    </MW:MetroWindow.Flyouts>
+    
+    <!-- Contenu de l'application -->
     <Grid>
         <Grid Background="{StaticResource AppColorBlue}">
             <Grid.RowDefinitions>
@@ -30,9 +185,9 @@
             <!-- TitleBar -->
             <Grid Grid.Row="0">
                 <!-- Menu Button-->
-                <Grid HorizontalAlignment="Left" Width="200">
+                <Grid HorizontalAlignment="Left" Width="200" Panel.ZIndex="1">
                     <StackPanel Orientation="Horizontal">
-                        <ToggleButton x:Name="BtnHamburgerMenu">
+                        <ToggleButton x:Name="BtnHamburgerMenu" Click="BtnHamburgerMenu_Click" Cursor="Hand">
                             <ToggleButton.Style>
                                 <Style TargetType="ToggleButton">
                                     <Setter Property="Background" Value="{StaticResource AppColorCyan}"/>
@@ -66,7 +221,7 @@
                 </Grid>
                 
                 <!-- App Name -->
-                <Grid HorizontalAlignment="Stretch">
+                <Grid HorizontalAlignment="Stretch" PreviewMouseMove="WindowDragMove" Background="Transparent">
                     <TextBlock Text="WIKKI" FontFamily="Emmett" FontSize="32" FontWeight="ExtraBold"
                                HorizontalAlignment="Center" VerticalAlignment="Center"
                                Foreground="{StaticResource AppColorWhite}"/>
@@ -75,15 +230,18 @@
                 <!-- Window Buttons -->
                 <Grid HorizontalAlignment="Right">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
-                        <Button x:Name="BtnWindowMinimize" Style="{StaticResource MinCloseBtnStyle}">
+                        <Button x:Name="BtnWindowMinimize" Style="{StaticResource MinCloseBtnStyle}"
+                                Click="BtnWindowMinimize_click">
                             <MD:PackIcon Kind="WindowMinimize" Width="24" Height="24" 
                                          Foreground="{StaticResource AppColorCyan}"
                                          FontWeight="ExtraBold"/>
                         </Button>
-                        <ToggleButton x:Name="BtnWindowRestore" Margin="8 0" Style="{StaticResource MaxBtnStyle}">
+                        <ToggleButton x:Name="BtnWindowRestore" Margin="8 0" Style="{StaticResource MaxBtnStyle}"
+                                      Click="BtnWindowMaximize_click" Cursor="Hand">
                             
                         </ToggleButton>
-                        <Button x:Name="BtnWindowClose" Style="{StaticResource MinCloseBtnStyle}">
+                        <Button x:Name="BtnWindowClose" Style="{StaticResource MinCloseBtnStyle}"
+                                Click="BtnWindowClose_click">
                             <MD:PackIcon Kind="WindowClose" Width="24" Height="24" 
                                          Foreground="Red"
                                          FontWeight="ExtraBold"/>
@@ -93,7 +251,9 @@
             </Grid>
             
             <!-- Content page -->
-            <Grid Grid.Row="1"></Grid>
+            <Grid Grid.Row="1">
+
+            </Grid>
         </Grid>
     </Grid>
 </MW:MetroWindow>
