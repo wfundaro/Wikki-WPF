@@ -11,4 +11,8 @@
     <PackageReference Include="MaterialDesignThemes.MahApps" Version="0.2.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="UCComposant\" />
+  </ItemGroup>
+
 </Project>

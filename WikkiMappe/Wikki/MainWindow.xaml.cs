@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Wikki.UCs;
 
 namespace Wikki
 {
@@ -29,6 +30,29 @@ namespace Wikki
             // On force l'ouverture du menu Flyout de gauche au démarrage
             //MenuFlyout.IsOpen = true;
         }
+
+        #region Methodes
+        private void MoveMenuCursor(int menuItemIndex)
+        {
+            double itemHeight = ListViewItemHome.Height;
+            BorderActiveMenu.Margin = new Thickness(0, 10 + (menuItemIndex * itemHeight), 0, 0);
+        }
+
+        private void ToggleFlyoutOpenCloseFlyout(int flyoutIndex)
+        {
+            try
+            {
+                if (this.Flyouts.Items[flyoutIndex] is Flyout flyout)
+                {
+                    flyout.IsOpen = !flyout.IsOpen;
+                }
+            }
+            catch
+            {
+                // index lfyout hors limite
+            }
+        } 
+        #endregion
 
         #region Window buttons Event
         private void WindowDragMove(object sender, MouseEventArgs e)
@@ -89,38 +113,43 @@ namespace Wikki
         }
         #endregion
 
+        #region Event widget
         private void BtnHamburgerMenu_Click(object sender, RoutedEventArgs e)
         {
             ToggleFlyoutOpenCloseFlyout(0);
         }
 
-        private void ToggleFlyoutOpenCloseFlyout(int flyoutIndex)
-        {
-            try
-            {
-                if (this.Flyouts.Items[flyoutIndex] is Flyout flyout)
-                {
-                    flyout.IsOpen = !flyout.IsOpen;
-                }
-            }
-            catch
-            {
-                // index lfyout hors limite
-            }
-        }
-
-        private void MoveMenuCursor(int menuItemIndex)
-        {
-            double itemHeight = ListViewItemHome.Height;
-            BorderActiveMenu.Margin = new Thickness(0, 10 + (menuItemIndex * itemHeight), 0, 0);
-        }
-
         private void MainMenuList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            int itemindex = MainMenuList.SelectedIndex;
-            MoveMenuCursor(itemindex);
+            int itemIndex = MainMenuList.SelectedIndex;
+            MoveMenuCursor(itemIndex);
             BtnHamburgerMenu.IsChecked = false;
             ToggleFlyoutOpenCloseFlyout(0);
+            
+            switch (itemIndex)
+            {
+                case 0:
+                    UCPlaceHolderGrid.Children.Clear();
+                    UCPlaceHolderGrid.Children.Add(new UCHome());
+                    break;
+                case 1:
+                    UCPlaceHolderGrid.Children.Clear();
+                    UCPlaceHolderGrid.Children.Add(new UCAddPerson());
+                    break;
+                case 2:
+                    UCPlaceHolderGrid.Children.Clear();
+                    UCPlaceHolderGrid.Children.Add(new UCStatistique());
+                    break;
+                default:
+                    break;
+            }
         }
+        private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            UCPlaceHolderGrid.Children.Clear();
+            UCPlaceHolderGrid.Children.Add(new UCHome());
+        }
+        #endregion
+
     }
 }

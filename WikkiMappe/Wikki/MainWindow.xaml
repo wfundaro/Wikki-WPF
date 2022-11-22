@@ -17,51 +17,28 @@
         ShowCloseButton="False"
         ShowMaxRestoreButton="False"
         ShowMinButton="False"
-        ResizeMode="CanResizeWithGrip"
+        ResizeMode="CanResizeWithGrip" Loaded="MetroWindow_Loaded"
         >
 
     <Window.Resources>
         <Storyboard x:Key="AnimateMenuItem">
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="MenuHomeTranslateTransform"
-                                           Storyboard.TargetProperty="X">
-                <EasingDoubleKeyFrame KeyTime="0" Value="-400"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0"/>
-            </DoubleAnimationUsingKeyFrames>
-
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="MenuDataTranslateTransform"
-                                           Storyboard.TargetProperty="X">
-                <EasingDoubleKeyFrame KeyTime="0" Value="-400"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="0"/>
-            </DoubleAnimationUsingKeyFrames>
-
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="MenuStatsTranslateTransform"
-                                           Storyboard.TargetProperty="X">
-                <EasingDoubleKeyFrame KeyTime="0" Value="-400"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
-            </DoubleAnimationUsingKeyFrames>
-
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="MenuTestTranslateTransform"
-                                           Storyboard.TargetProperty="X">
-                <EasingDoubleKeyFrame KeyTime="0" Value="-400"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="0"/>
-            </DoubleAnimationUsingKeyFrames>
 
             <ColorAnimationUsingKeyFrames Storyboard.TargetName="MenuFlyout"
                                           Storyboard.TargetProperty="(Background).(SolidColorBrush.Color)">
                 <LinearColorKeyFrame KeyTime="0" Value="{StaticResource AppCyanColor}"/>
                 <LinearColorKeyFrame KeyTime="0:0:0.3" Value="{StaticResource AppBlueColor}"/>
             </ColorAnimationUsingKeyFrames>
-            
+
         </Storyboard>
     </Window.Resources>
-    
+
     <Window.Triggers>
         <EventTrigger SourceName="BtnHamburgerMenu" RoutedEvent="ToggleButton.Checked">
             <BeginStoryboard Storyboard="{StaticResource AnimateMenuItem}"/>
         </EventTrigger>
     </Window.Triggers>
-    
-<!-- Utilisation du flyout de metroWindow sur la fenetre -->
+
+    <!-- Utilisation du flyout de metroWindow sur la fenetre -->
     <MW:MetroWindow.Flyouts>
         <MW:FlyoutsControl Margin="0 45 0 0">
             <!-- Flyout du menu de gauche -->
@@ -166,14 +143,14 @@
                     </Grid>
                 </Border>
             </MW:Flyout>
-        
+
             <!-- Flyout des infos venant du bas -->
             <MW:Flyout x:Name="InfoFlyout">
-                
+
             </MW:Flyout>
         </MW:FlyoutsControl>
     </MW:MetroWindow.Flyouts>
-    
+
     <!-- Contenu de l'application -->
     <Grid>
         <Grid Background="{StaticResource AppColorBlue}">
@@ -181,13 +158,13 @@
                 <RowDefinition Height="40"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            
+
             <!-- TitleBar -->
             <Grid Grid.Row="0">
                 <!-- Menu Button-->
                 <Grid HorizontalAlignment="Left" Width="200" Panel.ZIndex="1">
                     <StackPanel Orientation="Horizontal">
-                        <ToggleButton x:Name="BtnHamburgerMenu" Click="BtnHamburgerMenu_Click" Cursor="Hand">
+                        <ToggleButton x:Name="BtnHamburgerMenu" Click="BtnHamburgerMenu_Click" Cursor="Hand" >
                             <ToggleButton.Style>
                                 <Style TargetType="ToggleButton">
                                     <Setter Property="Background" Value="{StaticResource AppColorCyan}"/>
@@ -219,14 +196,14 @@
                         </ToggleButton>
                     </StackPanel>
                 </Grid>
-                
+
                 <!-- App Name -->
                 <Grid HorizontalAlignment="Stretch" PreviewMouseMove="WindowDragMove" Background="Transparent">
                     <TextBlock Text="WIKKI" FontFamily="Emmett" FontSize="32" FontWeight="ExtraBold"
                                HorizontalAlignment="Center" VerticalAlignment="Center"
                                Foreground="{StaticResource AppColorWhite}"/>
                 </Grid>
-                
+
                 <!-- Window Buttons -->
                 <Grid HorizontalAlignment="Right">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
@@ -238,7 +215,7 @@
                         </Button>
                         <ToggleButton x:Name="BtnWindowRestore" Margin="8 0" Style="{StaticResource MaxBtnStyle}"
                                       Click="BtnWindowMaximize_click" Cursor="Hand">
-                            
+
                         </ToggleButton>
                         <Button x:Name="BtnWindowClose" Style="{StaticResource MinCloseBtnStyle}"
                                 Click="BtnWindowClose_click">
@@ -249,9 +226,9 @@
                     </StackPanel>
                 </Grid>
             </Grid>
-            
+
             <!-- Content page -->
-            <Grid Grid.Row="1">
+            <Grid x:Name="UCPlaceHolderGrid"  Grid.Row="1">
 
             </Grid>
         </Grid>
