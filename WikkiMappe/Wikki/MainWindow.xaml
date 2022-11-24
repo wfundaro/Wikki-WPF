@@ -23,6 +23,30 @@
     <Window.Resources>
         <Storyboard x:Key="AnimateMenuItem">
 
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="MenuHomeTranslateTransform"
+                                           Storyboard.TargetProperty="X">
+                <EasingDoubleKeyFrame KeyTime="0" Value="-400"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="MenuDataTranslateTransform"
+                                           Storyboard.TargetProperty="X">
+                <EasingDoubleKeyFrame KeyTime="0" Value="-400"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="MenuStatsTranslateTransform"
+                                           Storyboard.TargetProperty="X">
+                <EasingDoubleKeyFrame KeyTime="0" Value="-400"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="MenuTestTranslateTransform"
+                                           Storyboard.TargetProperty="X">
+                <EasingDoubleKeyFrame KeyTime="0" Value="-400"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            
             <ColorAnimationUsingKeyFrames Storyboard.TargetName="MenuFlyout"
                                           Storyboard.TargetProperty="(Background).(SolidColorBrush.Color)">
                 <LinearColorKeyFrame KeyTime="0" Value="{StaticResource AppCyanColor}"/>
