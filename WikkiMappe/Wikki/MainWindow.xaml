@@ -17,7 +17,7 @@
         ShowCloseButton="False"
         ShowMaxRestoreButton="False"
         ShowMinButton="False"
-        ResizeMode="CanResizeWithGrip"
+        ResizeMode="CanResizeWithGrip" Loaded="MetroWindow_Loaded"
         >
 
     <Window.Resources>

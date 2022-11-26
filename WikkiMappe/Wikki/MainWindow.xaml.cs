@@ -129,16 +129,13 @@ namespace Wikki
             switch (itemIndex)
             {
                 case 0:
-                    UCPlaceHolderGrid.Children.Clear();
-                    UCPlaceHolderGrid.Children.Add(new UCHome());
+                    PlaceChildren(new UCHome());
                     break;
                 case 1:
-                    UCPlaceHolderGrid.Children.Clear();
-                    UCPlaceHolderGrid.Children.Add(new UCAddPerson());
+                    PlaceChildren(new UCAddPerson());
                     break;
                 case 2:
-                    UCPlaceHolderGrid.Children.Clear();
-                    UCPlaceHolderGrid.Children.Add(new UCStatistique());
+                    PlaceChildren(new UCStatistique());
                     break;
                 default:
                     break;
@@ -146,10 +143,14 @@ namespace Wikki
         }
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
+            PlaceChildren(new UCHome());
+        }
+
+        private void PlaceChildren(UserControl uc)
+        {
             UCPlaceHolderGrid.Children.Clear();
-            UCPlaceHolderGrid.Children.Add(new UCHome());
+            UCPlaceHolderGrid.Children.Add(uc);
         }
         #endregion
-
     }
 }
